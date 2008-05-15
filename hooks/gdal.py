@@ -13,7 +13,7 @@ def post_make(options, buildout):
     # Generate rpath information..
     rpath = ['%s/lib' % buildout[part]['location']
              for part
-             in ('geos', 'proj', 'postgresql',
+             in ('geos', 'proj', 'postgresql', 'libidn',
                  'libpng', 'libtiff', 'libgif',
                  'libjpeg', 'curl', 'zlib'
                  'libiconv', 'openssl', 'swig')
@@ -32,7 +32,7 @@ def post_make(options, buildout):
         raise zc.buildout.UserError('System error')
 
 def getgdalenv(options,buildout):
-    for var in ['zlib', 'libiconv', 'openssl',
+    for var in ['zlib', 'libiconv', 'openssl', 'libidn',
                 'geos', 'proj', 'swig', 'libtiff',
                 'libjpeg', 'libtiff', 'libpng',
                 'libgif', 'postgresql', 'postgis']:
