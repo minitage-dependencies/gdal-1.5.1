@@ -45,7 +45,7 @@ def post_make(options, buildout):
         log.error('Error executing command: %s' % cmd)
         raise zc.buildout.UserError('System error')
 
-def appendEnvVar(env,var,sep=":",before=True):
+def append_env_var(env,var,sep=":",before=True):
     """ append text to a environnement variable
     @param env String variable to set
     @param before append before or after the variable"""
@@ -55,11 +55,11 @@ def appendEnvVar(env,var,sep=":",before=True):
 
 def getgdalenv(options,buildout):
     for var in ['zlib','libiconv','openssl','geos','proj','swig','libtiff','libjpeg', 'libtiff', 'libpng', 'libgif','postgresql','postgis']:
-        appendEnvVar('LDFLAGS', ["-L%(lib)s/lib -Wl,-rpath -Wl,%(lib)s/lib %(os)s"%{'lib':buildout[var]['location'],'os':os_ldflags}],sep=' ',before=False)
-        appendEnvVar('LD_RUN_PATH', ["%(lib)s/lib'"%{'lib':buildout[var]['location']}],sep=':',before=False)
-        appendEnvVar('CFLAGS', ["-I%s/include "%(buildout[var]['location'])],sep=' ',before=False)
+        append_env_var('LDFLAGS', ["-L%(lib)s/lib -Wl,-rpath -Wl,%(lib)s/lib %(os)s"%{'lib':buildout[var]['location'],'os':os_ldflags}],sep=' ',before=False)
+        append_env_var('LD_RUN_PATH', ["%(lib)s/lib'"%{'lib':buildout[var]['location']}],sep=':',before=False)
+        append_env_var('CFLAGS', ["-I%s/include "%(buildout[var]['location'])],sep=' ',before=False)
 
-    appendEnvVar('CFLAGS', ["-I%s/include/openssl "%(buildout['openssl']['location'])],sep=' ',before=False)
+    append_env_var('CFLAGS', ["-I%s/include/openssl "%(buildout['openssl']['location'])],sep=' ',before=False)
     os.environ['CPPFLAGS'] = os.environ['CFLAGS']
     os.environ['CXXFLAGS'] = os.environ['CFLAGS']
     # copy in LNK_FLAGS for gdal < 1.5 !
