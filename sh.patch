@@ -1,0 +1,15 @@
+diff -ur gdal-1.6.1.old/configure gdal-1.6.1/configure
+--- gdal-1.6.1.old/configure	2009-04-14 18:29:35.000000000 +0200
++++ gdal-1.6.1/configure	2009-07-23 00:53:01.000000000 +0200
+@@ -8248,7 +8248,11 @@
+ LIBTOOL_DEPS="$ltmain"
+ 
+ # Always use our own libtool.
++if [ `uname` != 'FreeBSD' ];then
+ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
++else
++LIBTOOL='bash $(top_builddir)/libtool'
++fi
+ 
+ 
+ 
